@@ -1,0 +1,24 @@
+{
+    "name": "carlosio/pingdom",
+    "type": "library",
+    "description": "Pingdom PHP API",
+    "keywords": ["pingdom", "api"],
+    "homepage": "https://github.com/carlosbuenosvinos/php-pingdom-api",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Carlos Buenosvinos",
+            "email": "cbuenosvinos@emagister.com",
+            "homepage": "http://engineering.emagister.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3",
+        "guzzle/guzzle": "v2.7.2"
+    },
+    "autoload": {
+        "psr-0": {
+            "CarlosIO": "src"
+        }
+    }
+}
