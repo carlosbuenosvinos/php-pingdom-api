@@ -1,8 +1,9 @@
-CarlosIO\Pingdom
+CarlosIO\Pingdom [![Build Status](https://secure.travis-ci.org/carlosbuenosvinos/php-pingdom-api.png?branch=master)](http://travis-ci.org/carlosbuenosvinos/php-pingdom-api)
 =================
 CarlosIO\Pingdom is a Pingdom API written in PHP
-for PHP 5.3+. It has been born for Dashboard
-and extreme feedback purposes.
+with multiaccount support. So, if you don't want
+to pay for a premium account, you can create free
+ones and integrate them using this API.
 
 Requiring in another project
 ============================
@@ -16,15 +17,17 @@ Using composer:
 
 Usage
 =====
-Usage is fairly straightforward,
+Usage is fairly straightforward. Here is an example:
 
 ```php
 <?php
     require_once __DIR__ . '/../vendor/autoload.php';
 
-    use CarlosIO\Pingdom;
+    use CarlosIO\Pingdom\Account;
+    use CarlosIO\Pingdom\Client;
 
-    $pingdom = new Pingdom('<user>', '<password>', '<token>');
-    $checks = $pingdom->getChecks();
+    $client = new Client();
+    $client->addAccount(new Account('<user>', '<password>', '<token>'));
+    $checks = $client->getChecks();
     print_r($checks);
 ```
