@@ -2,7 +2,6 @@
 namespace CarlosIO\Pingdom;
 
 use CarlosIO\Pingdom\Check;
-use Guzzle\Service\Client;
 
 class Client
 {
@@ -105,7 +104,7 @@ class Client
      */
     public function getChecks()
     {
-        $client = new Client(static::URL_REST);
+        $client = new \Guzzle\Service\Client(static::URL_REST);
 
         /** @var $request \Guzzle\Http\Message\Request */
         $request = $client->get('checks', array('App-Key' => $this->token));
