@@ -7,7 +7,7 @@ namespace CarlosIO\Pingdom\Tests;
  */
 class AccountTest extends \PHPUnit_Framework_TestCase
 {
-    public function testJsonReturnsJsonResponse()
+    public function testAccountCreationAndGetters()
     {
         $testUsername = 'hi@carlos.io';
         $testPassword = 'secretpassword';
