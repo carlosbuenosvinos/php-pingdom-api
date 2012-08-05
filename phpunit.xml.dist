@@ -3,7 +3,7 @@
 <phpunit bootstrap="tests/bootstrap.php" colors="true">
     <testsuites>
         <testsuite name="CarlosIO/Pingdom Test Suite">
-            <directory>tests/Jenkins/</directory>
+            <directory>tests/Pingdom/</directory>
         </testsuite>
     </testsuites>
 
