@@ -1,133 +1,85 @@
 <?php
 namespace CarlosIO\Pingdom;
 
-use CarlosIO\Pingdom\Check;
-
 class Client
 {
     const URL_REST = 'https://api.pingdom.com/api/2.0';
 
     /**
-     * @var string Account username
+     * @var array Pingdom accounts to track
      */
-    private $username;
+    private $_accounts;
 
-    /**
-     * @var string Account password
-     */
-    private $password;
-
-    /**
-     * @var string Account API token (32 chars)
-     */
-    private $token;
-
-    /**
-     * Builds a Pingdom Client
-     *
-     * @param string $username
-     * @param string $password
-     * @param string $token
-     */
-    public function __construct($username, $password, $token)
+    public function __construct()
     {
-        $this->username = $username;
-        $this->password = $password;
-        $this->token = $token;
+        $this->removeAllAccounts();
     }
 
     /**
-     * Returns username account
+     * Returns all accounts tracked
      *
-     * @return string Username
+     * @return array<\CarlosIO\Pingdom\Account> All the accounts
      */
-    public function getUsername()
+    public function getAccounts()
     {
-        return $this->username;
+        return $this->_accounts;
     }
 
     /**
-     * Returns password account
+     * Adds an specific account
      *
-     * @return string Password
+     * @param Account $account
      */
-    public function getPassword()
+    public function addAccount(\CarlosIO\Pingdom\Account $account)
     {
-        return $this->password;
+        $this->_accounts[md5(serialize($account))] = $account;
     }
 
     /**
-     * Returns token account
+     * Sets just an specific account
      *
-     * @return string Token (32 chars)
+     * @param Account $account
      */
-    public function getToken()
+    public function setAccount(\CarlosIO\Pingdom\Account $account)
     {
-        return $this->token;
+        $this->removeAllAccounts();
+        $this->addAccount($account);
     }
 
     /**
-     * Sets username account
+     * Removes an specific account if exists
      *
-     * @param string username
+     * @param Account $account
      */
-    public function setUsername($username)
+    public function removeAccount(\CarlosIO\Pingdom\Account $account)
     {
-        $this->username = $username;
+        if (isset($this->_accounts[md5(serialize($account))])) {
+            unset($this->_accounts[md5(serialize($account))]);
+        }
     }
 
     /**
-     * Sets password account
-     *
-     * @param string password
+     * Removes all the accounts
      */
-    public function setPassword($password)
+    public function removeAllAccounts()
     {
-        $this->password = $password;
+        $this->_accounts = array();
     }
 
-    /**
-     * Sets token account
-     *
-     * @param string Token (32 chars)
-     */
-    public function setToken($token)
-    {
-        $this->token = $token;
-    }
 
     /**
-     * Returns a list overview of all checks
+     * Returns a list overview of all checks from all accounts
      *
      * @throws \Exception
      * @return array<\CarlosIO\Pingdom\Checks> All checks
      */
     public function getChecks()
     {
-        $client = new \Guzzle\Service\Client(static::URL_REST);
-
-        /** @var $request \Guzzle\Http\Message\Request */
-        $request = $client->get('checks', array('App-Key' => $this->token));
-        $request->setAuth($this->username, $this->password);
-        $response = $request->send();
-
-        // Execute the request and decode the json result into an associative array
-        $response = json_decode($response->getBody(), true);
-
-        // Check for errors returned by the API
-        if (isset($response['error'])) {
-            throw new \Exception("Error: " . $response['error']['errormessage']);
+        $checks = array();
+        foreach ($this->_accounts as /** @var \CarlosIO\Pingdom\Account $account */ $account) {
+            $checks = array_merge($checks, $account->getChecks());
         }
 
-        // Fetch the list of checks from the response
-        $checksList = $response['checks'];
-        $result = array();
-
-        // Print the names and statuses of all checks in the list
-        foreach ($checksList as $check) {
-            $result[] = new Check($check['name'], $check['status']);
-        }
-
-        return $result;
+        return $checks;
     }
 }

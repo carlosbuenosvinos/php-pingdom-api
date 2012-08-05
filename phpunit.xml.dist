@@ -1,15 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<phpunit bootstrap="tests/bootstrap.php" colors="true">
+<phpunit backupGlobals="false"
+         backupStaticAttributes="false"
+         colors="true"
+         convertErrorsToExceptions="true"
+         convertNoticesToExceptions="true"
+         convertWarningsToExceptions="true"
+         processIsolation="false"
+         stopOnFailure="false"
+         syntaxCheck="false"
+         bootstrap="tests/bootstrap.php"
+>
     <testsuites>
         <testsuite name="CarlosIO/Pingdom Test Suite">
-            <directory>tests/Pingdom/</directory>
+            <directory>./tests/CarlosIO/Pingdom/</directory>
         </testsuite>
     </testsuites>
 
     <filter>
         <whitelist>
-            <directory suffix=".php">src/CarlosIO/</directory>
+            <directory suffix=".php">./src/CarlosIO/</directory>
         </whitelist>
     </filter>
 </phpunit>
