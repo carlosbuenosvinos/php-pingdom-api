@@ -19,6 +19,11 @@ class Account
     private $_token;
 
     /**
+     * @var \Guzzle\Service\Client HTTP Client to use
+     */
+    private $_client;
+
+    /**
      * Builds a Pingdom Client
      *
      * @param string $username
@@ -92,6 +97,11 @@ class Account
         $this->_token = $token;
     }
 
+    public function setHttpClient($client)
+    {
+        $this->_client = $client;
+    }
+
     /**
      * Returns a list overview of all checks from current accounts
      *
@@ -100,7 +110,10 @@ class Account
      */
     public function getChecks()
     {
-        $client = new \Guzzle\Service\Client(static::URL_REST);
+        $client = $this->_client;
+        if (null !== $client) {
+            $client = new \Guzzle\Service\Client(static::URL_REST);
+        }
 
         /** @var $request \Guzzle\Http\Message\Request */
         $request = $client->get('checks', array('App-Key' => $this->getToken()));
