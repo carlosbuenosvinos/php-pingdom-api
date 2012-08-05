@@ -1,5 +1,8 @@
-CarlosIO\Pingdom [![Build Status](https://secure.travis-ci.org/carlosbuenosvinos/php-pingdom-api.png?branch=master)](http://travis-ci.org/carlosbuenosvinos/php-pingdom-api)
-=================
+CarlosIO\Pingdom
+================
+
+[![Build Status](https://secure.travis-ci.org/carlosbuenosvinos/php-pingdom-api.png?branch=master)](http://travis-ci.org/carlosbuenosvinos/php-pingdom-api)
+
 CarlosIO\Pingdom is a Pingdom API written in PHP
 with multiaccount support. So, if you don't want
 to pay for a premium account, you can create free
@@ -11,7 +14,7 @@ Using composer:
 
 ```
     "require": {
-        "carlosio/pingdom": "dev-master"
+        "carlosio/pingdom": "1.*"
     }
 ```
 
