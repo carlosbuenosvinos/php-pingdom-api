@@ -1,7 +1,7 @@
 {
     "name": "carlosio/pingdom",
     "type": "library",
-    "description": "Pingdom PHP API",
+    "description": "A PHP library for dealing with the Pingdom REST API with multiaccount support",
     "keywords": ["pingdom", "api"],
     "homepage": "https://github.com/carlosbuenosvinos/php-pingdom-api",
     "license": "MIT",
