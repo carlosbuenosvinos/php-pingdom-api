@@ -105,7 +105,7 @@ class Account
     }
 
     /**
-     * Returns a list overview of all checks from current accounts
+     * Returns a list overview of all checks from current account
      *
      * @throws \Exception
      * @return array<\CarlosIO\Pingdom\Checks> All checks
@@ -129,7 +129,7 @@ class Account
      * Returns a list overview of all actions (alerts) from current account
      *
      * @throws \Exception
-     * @return array<\CarlosIO\Pingdom\Checks> All checks
+     * @return array<\CarlosIO\Pingdom\Checks> All actions
      */
     public function getActions($options = array())
     {
@@ -139,6 +139,27 @@ class Account
         $result = array();
         foreach ($itemList as $item) {
             $newItem = \CarlosIO\Pingdom\Action::createFromArray($item);
+            $newItem->setAccount($this);
+            $result[] = $newItem;
+        }
+
+        return $result;
+    }
+
+    /**
+     * Returns a list of all contacts from current account
+     *
+     * @throws \Exception
+     * @return array<\CarlosIO\Pingdom\Checks> All contacts
+     */
+    public function getContacts($options = array())
+    {
+        $response = $this->_callMethod('contacts', $options);
+        $itemList = $response['contacts'];
+
+        $result = array();
+        foreach ($itemList as $item) {
+            $newItem = \CarlosIO\Pingdom\Contact::createFromArray($item);
             $newItem->setAccount($this);
             $result[] = $newItem;
         }

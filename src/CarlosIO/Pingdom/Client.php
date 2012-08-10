@@ -97,6 +97,22 @@ class Client
         return $items;
     }
 
+    /**
+     * Returns a list overview of all contacts from all accounts
+     *
+     * @throws \Exception
+     * @return array<\CarlosIO\Pingdom\Contact> All contacts
+     */
+    public function getContacts()
+    {
+        $items = array();
+        foreach ($this->_accounts as /** @var \CarlosIO\Pingdom\Account $account */ $account) {
+            $items = array_merge($items, $account->getContacts());
+        }
+
+        return $items;
+    }
+
     private function _generateAccountKey(\CarlosIO\Pingdom\Account $account)
     {
         return md5(serialize($account));

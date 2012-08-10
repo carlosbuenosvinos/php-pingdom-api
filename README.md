@@ -45,11 +45,17 @@ Usage is fairly straightforward. Here is an example:
     // As an example...
     $checks = $client->getChecks();
     foreach ($checks as /** @var \CarlosIO\Pingdom\Check $check */ $check) {
-        echo $check->getName(), ' (', $check->getHostname(), ')', PHP_EOL, $check->getStatus(), ' ', $check->getLastResponseTime(), PHP_EOL;
+        echo $check->getName(), ' (', $check->getHostname(), ')', PHP_EOL
+        echo $check->getStatus(), ' ', $check->getLastResponseTime(), PHP_EOL;
     }
 
     $actions = $client->getActions();
     foreach ($actions as /** @var \CarlosIO\Pingdom\Action $action */ $action) {
         echo $action->getMessageFull(), ' ', $action->getContactName(), ' ', $action->getVia(), PHP_EOL;
+    }
+
+    $contacts = $client->getContacts();
+    foreach ($contacts as /** @var \CarlosIO\Pingdom\Contact $contact */ $contact) {
+        echo $contact->getName(), ' ', $contact->getEmail(), PHP_EOL;
     }
 ```

@@ -1,0 +1,12 @@
+{
+    "contacts" : [ {
+        "id" : 111250,
+        "name" : "John Doe",
+        "email" : "john@johnsdomain.com",
+        "cellphone" : "46-5555555",
+        "countryiso" : "SE",
+        "defaultsmsprovider" : "clickatell",
+        "directtwitter" : false,
+        "paused" : false
+    } ]
+}
