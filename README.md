@@ -19,6 +19,8 @@ Here are the services you can use using this API:
   * /api/{version}/actions
 * Contacts
   * /api/{version}/contacts
+* Credits
+  * /api/{version}/credits
 
 Requiring in another project
 ============================
@@ -59,5 +61,10 @@ Usage is fairly straightforward. Here is an example:
     $contacts = $client->getContacts();
     foreach ($contacts as /** @var \CarlosIO\Pingdom\Contact $contact */ $contact) {
         echo $contact->getName(), ' ', $contact->getEmail(), PHP_EOL;
+    }
+
+    $credits = $client->getCredits();
+    foreach ($credits as /** @var \CarlosIO\Pingdom\Credit $credit */ $credit) {
+        echo $credit->getAvailableChecks(), PHP_EOL;
     }
 ```

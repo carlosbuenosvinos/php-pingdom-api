@@ -167,6 +167,27 @@ class Account
         return $result;
     }
 
+    /**
+     * Returns a list of all credits from current account
+     *
+     * @throws \Exception
+     * @return array<\CarlosIO\Pingdom\Checks> All credits
+     */
+    public function getCredits($options = array())
+    {
+        $response = $this->_callMethod('credits', $options);
+        $itemList = array($response['credits']);
+
+        $result = array();
+        foreach ($itemList as $item) {
+            $newItem = \CarlosIO\Pingdom\Credit::createFromArray($item);
+            $newItem->setAccount($this);
+            $result[] = $newItem;
+        }
+
+        return $result;
+    }
+
     protected function _callMethod($command, $options)
     {
         $client = $this->_client;

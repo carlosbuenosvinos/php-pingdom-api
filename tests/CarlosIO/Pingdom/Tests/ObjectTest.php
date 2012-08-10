@@ -7,7 +7,7 @@ namespace CarlosIO\Pingdom\Tests;
  */
 class ObjectTest extends \PHPUnit_Framework_TestCase
 {
-    public function testObjectAccountSettesAndGetters()
+    public function testObjectAccountSettersAndGetters()
     {
         $testUsername = 'hi@carlos.io';
         $testPassword = 'secretpassword';

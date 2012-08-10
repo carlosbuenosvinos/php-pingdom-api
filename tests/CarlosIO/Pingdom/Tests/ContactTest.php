@@ -7,19 +7,19 @@ namespace CarlosIO\Pingdom\Tests;
  */
 class ContactTest extends \PHPUnit_Framework_TestCase
 {
-    public function testCheckCreationAndGetters()
+    public function testContactCreationAndGetters()
     {
         $data = json_decode(file_get_contents(STUB_PATH . '/contacts.json'), true);
-        /** @var $contact \CarlosIO\Pingdom\Contact */
-        $contact = \CarlosIO\Pingdom\Contact::createFromArray($data['contacts'][0]);
+        /** @var $item \CarlosIO\Pingdom\Contact */
+        $item = \CarlosIO\Pingdom\Contact::createFromArray($data['contacts'][0]);
 
-        $this->assertSame(111250, $contact->getId());
-        $this->assertSame('John Doe', $contact->getName());
-        $this->assertSame('john@johnsdomain.com', $contact->getEmail());
-        $this->assertSame('46-5555555', $contact->getCellphone());
-        $this->assertSame('SE', $contact->getCountryIso());
-        $this->assertSame('clickatell', $contact->getDefaultSmsProvider());
-        $this->assertSame(false, $contact->getDirectTwitter());
-        $this->assertSame(false, $contact->getPaused());
+        $this->assertSame(111250, $item->getId());
+        $this->assertSame('John Doe', $item->getName());
+        $this->assertSame('john@johnsdomain.com', $item->getEmail());
+        $this->assertSame('46-5555555', $item->getCellphone());
+        $this->assertSame('SE', $item->getCountryIso());
+        $this->assertSame('clickatell', $item->getDefaultSmsProvider());
+        $this->assertSame(false, $item->getDirectTwitter());
+        $this->assertSame(false, $item->getPaused());
     }
 }

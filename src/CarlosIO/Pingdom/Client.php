@@ -113,6 +113,22 @@ class Client
         return $items;
     }
 
+    /**
+     * Returns a list overview of all credits from all accounts
+     *
+     * @throws \Exception
+     * @return array<\CarlosIO\Pingdom\Credit> All credits
+     */
+    public function getCredits()
+    {
+        $items = array();
+        foreach ($this->_accounts as /** @var \CarlosIO\Pingdom\Account $account */ $account) {
+            $items = array_merge($items, $account->getCredits());
+        }
+
+        return $items;
+    }
+
     private function _generateAccountKey(\CarlosIO\Pingdom\Account $account)
     {
         return md5(serialize($account));
