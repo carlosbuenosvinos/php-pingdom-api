@@ -37,7 +37,6 @@ class Object
     {
         $newElement = new static();
         $newElement->_data = $array;
-        // $newElement->_account = $account;
         return $newElement;
     }
 

@@ -110,7 +110,43 @@ class Account
      * @throws \Exception
      * @return array<\CarlosIO\Pingdom\Checks> All checks
      */
-    public function getChecks()
+    public function getChecks($options = array())
+    {
+        $response = $this->_callMethod('checks', $options);
+        $itemList = $response['checks'];
+
+        $result = array();
+        foreach ($itemList as $item) {
+            $newItem = \CarlosIO\Pingdom\Check::createFromArray($item);
+            $newItem->setAccount($this);
+            $result[] = $newItem;
+        }
+
+        return $result;
+    }
+
+    /**
+     * Returns a list overview of all actions (alerts) from current account
+     *
+     * @throws \Exception
+     * @return array<\CarlosIO\Pingdom\Checks> All checks
+     */
+    public function getActions($options = array())
+    {
+        $response = $this->_callMethod('actions', $options);
+        $itemList = $response['actions']['alerts'];
+
+        $result = array();
+        foreach ($itemList as $item) {
+            $newItem = \CarlosIO\Pingdom\Action::createFromArray($item);
+            $newItem->setAccount($this);
+            $result[] = $newItem;
+        }
+
+        return $result;
+    }
+
+    protected function _callMethod($command, $options)
     {
         $client = $this->_client;
         if (null === $client) {
@@ -118,27 +154,23 @@ class Account
         }
 
         /** @var $request \Guzzle\Http\Message\Request */
-        $request = $client->get('checks', array('App-Key' => $this->getToken()));
+        $request = $client->get($command, array('App-Key' => $this->getToken()));
         $request->setAuth($this->getUsername(), $this->getPassword());
         $response = $request->send();
 
         // Execute the request and decode the json result into an associative array
-        $response = json_decode($response->getBody(), true);
+        $response = @json_decode($response->getBody(), true);
+
+        // Check JSON parsing errors
+        if (!$response) {
+            throw new \Exception("Error: Response is not JSON valid");
+        }
 
         // Check for errors returned by the API
-        if (isset($response['error'])) {
+        if (!$response || isset($response['error'])) {
             throw new \Exception("Error: " . $response['error']['errormessage']);
         }
 
-        // Fetch the list of checks from the response
-        $checksList = $response['checks'];
-        $result = array();
-
-        // Print the names and statuses of all checks in the list
-        foreach ($checksList as $check) {
-            $result[] = \CarlosIO\Pingdom\Check::createFromArray($check, $this);
-        }
-
-        return $result;
+        return $response;
     }
 }

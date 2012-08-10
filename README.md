@@ -15,6 +15,8 @@ All the Pingdom services are available at http://www.pingdom.com/services/api-do
 Here are the services you can use using this API:
 * Check
   * /api/{version}/checks
+* Actions
+  * /api/{version}/actions
 
 Requiring in another project
 ============================
@@ -39,10 +41,15 @@ Usage is fairly straightforward. Here is an example:
 
     $client = new Client();
     $client->addAccount(new Account('<user>', '<password>', '<token>'));
-    $checks = $client->getChecks();
 
     // As an example...
+    $checks = $client->getChecks();
     foreach ($checks as /** @var \CarlosIO\Pingdom\Check $check */ $check) {
         echo $check->getName(), ' (', $check->getHostname(), ')', PHP_EOL, $check->getStatus(), ' ', $check->getLastResponseTime(), PHP_EOL;
+    }
+
+    $actions = $client->getActions();
+    foreach ($actions as /** @var \CarlosIO\Pingdom\Action $action */ $action) {
+        echo $action->getMessageFull(), ' ', $action->getContactName(), ' ', $action->getVia(), PHP_EOL;
     }
 ```

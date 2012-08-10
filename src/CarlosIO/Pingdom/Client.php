@@ -69,16 +69,32 @@ class Client
      * Returns a list overview of all checks from all accounts
      *
      * @throws \Exception
-     * @return array<\CarlosIO\Pingdom\Checks> All checks
+     * @return array<\CarlosIO\Pingdom\Check> All checks
      */
     public function getChecks()
     {
-        $checks = array();
+        $items = array();
         foreach ($this->_accounts as /** @var \CarlosIO\Pingdom\Account $account */ $account) {
-            $checks = array_merge($checks, $account->getChecks());
+            $items = array_merge($items, $account->getChecks());
         }
 
-        return $checks;
+        return $items;
+    }
+
+    /**
+     * Returns a list overview of all actions from all accounts
+     *
+     * @throws \Exception
+     * @return array<\CarlosIO\Pingdom\Action> All actions
+     */
+    public function getActions()
+    {
+        $items = array();
+        foreach ($this->_accounts as /** @var \CarlosIO\Pingdom\Account $account */ $account) {
+            $items = array_merge($items, $account->getActions());
+        }
+
+        return $items;
     }
 
     private function _generateAccountKey(\CarlosIO\Pingdom\Account $account)
