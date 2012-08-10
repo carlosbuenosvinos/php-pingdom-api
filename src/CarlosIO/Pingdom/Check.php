@@ -1,57 +1,105 @@
 <?php
 namespace CarlosIO\Pingdom;
 
-class Check
+class Check extends \CarlosIO\Pingdom\Object
 {
     /**
-     * @var string Check name
+     * Returns Check identifier
+     *
+     * @return int
      */
-    private $_name;
-
-    /**
-     * @var string Check status
-     */
-    private $_status;
-
-    /**
-     * @var \CarlosIO\Pingdom\Account Parent account
-     */
-    private $_account;
-
-    public function __construct($name, $status, \CarlosIO\Pingdom\Account $account)
+    public function getId()
     {
-        $this->_name = $name;
-        $this->_status = $status;
-        $this->_account = $account;
+        return $this->_getProperty('id');
     }
 
     /**
-     * Returns check name
+     * Returns Check name
      *
-     * @return string Check name
+     * @return string
      */
     public function getName()
     {
-        return $this->_name;
+        return $this->_getProperty('name');
     }
 
     /**
-     * Returns check status
+     * Returns Check type
      *
-     * @return string Check status
+     * @return string Check name
+     */
+    public function getType()
+    {
+        return $this->_getProperty('type');
+    }
+
+    /**
+     * Returns Timestamp of last error (if any). Format is UNIX timestamp
+     *
+     * @return int
+     */
+    public function getLastErrorTime()
+    {
+        return $this->_getProperty('lasterrortime');
+    }
+
+    /**
+     * Returns Timestamp of last test (if any). Format is UNIX timestamp
+     *
+     * @return int
+     */
+    public function getLastTestTime()
+    {
+        return $this->_getProperty('lasttesttime');
+    }
+
+    /**
+     * Returns Response time (in milliseconds) of last test
+     *
+     * @return int
+     */
+    public function getLastResponseTime()
+    {
+        return $this->_getProperty('lastresponsetime');
+    }
+
+    /**
+     * Returns Current status of check
+     *
+     * @return string up, down, unconfirmed_down, unknown, paused
      */
     public function getStatus()
     {
-        return $this->_status;
+        return $this->_getProperty('status');
     }
 
     /**
-     * Returns parent account
+     * Returns How often should the check be tested? (minutes)
      *
-     * @return \CarlosIO\Pingdom\Account Parent account
+     * @return int
      */
-    public function getAccount()
+    public function getResolution()
     {
-        return $this->_account;
+        return $this->_getProperty('resolution');
+    }
+
+    /**
+     * Returns Target host
+     *
+     * @return string
+     */
+    public function getHostname()
+    {
+        return $this->_getProperty('hostname');
+    }
+
+    /**
+     * Returns Creating time. Format is UNIX timestamp
+     *
+     * @return int
+     */
+    public function getCreated()
+    {
+        return $this->_getProperty('created');
     }
 }

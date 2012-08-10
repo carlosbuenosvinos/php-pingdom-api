@@ -3,6 +3,8 @@ namespace CarlosIO\Pingdom;
 
 class Account
 {
+    const URL_REST = 'https://api.pingdom.com/api/2.0';
+
     /**
      * @var string Account username
      */
@@ -21,7 +23,7 @@ class Account
     /**
      * @var \Guzzle\Service\Client HTTP Client to use
      */
-    private $_client;
+    private $_client = null;
 
     /**
      * Builds a Pingdom Client
@@ -111,7 +113,7 @@ class Account
     public function getChecks()
     {
         $client = $this->_client;
-        if (null !== $client) {
+        if (null === $client) {
             $client = new \Guzzle\Service\Client(static::URL_REST);
         }
 
@@ -134,7 +136,7 @@ class Account
 
         // Print the names and statuses of all checks in the list
         foreach ($checksList as $check) {
-            $result[] = new \CarlosIO\Pingdom\Check($check['name'], $check['status'], $this);
+            $result[] = \CarlosIO\Pingdom\Check::createFromArray($check, $this);
         }
 
         return $result;

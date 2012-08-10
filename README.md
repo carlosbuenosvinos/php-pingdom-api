@@ -8,6 +8,14 @@ with multiaccount support. So, if you don't want
 to pay for a premium account, you can create free
 ones and integrate them using this API.
 
+Features
+========
+All the Pingdom services are available at http://www.pingdom.com/services/api-documentation-rest
+
+Here are the services you can use using this API:
+* Check
+** /api/{version}/checks
+
 Requiring in another project
 ============================
 Using composer:
@@ -32,5 +40,6 @@ Usage is fairly straightforward. Here is an example:
     $client = new Client();
     $client->addAccount(new Account('<user>', '<password>', '<token>'));
     $checks = $client->getChecks();
+
     print_r($checks);
 ```

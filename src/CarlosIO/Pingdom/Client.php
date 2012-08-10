@@ -3,8 +3,6 @@ namespace CarlosIO\Pingdom;
 
 class Client
 {
-    const URL_REST = 'https://api.pingdom.com/api/2.0';
-
     /**
      * @var array Pingdom accounts to track
      */
@@ -32,7 +30,7 @@ class Client
      */
     public function addAccount(\CarlosIO\Pingdom\Account $account)
     {
-        $this->_accounts[md5(serialize($account))] = $account;
+        $this->_accounts[$this->_generateAccountKey($account)] = $account;
     }
 
     /**
@@ -53,8 +51,9 @@ class Client
      */
     public function removeAccount(\CarlosIO\Pingdom\Account $account)
     {
-        if (isset($this->_accounts[md5(serialize($account))])) {
-            unset($this->_accounts[md5(serialize($account))]);
+        $key = $this->_generateAccountKey($account);
+        if (isset($this->_accounts[$key])) {
+            unset($this->_accounts[$key]);
         }
     }
 
@@ -65,7 +64,6 @@ class Client
     {
         $this->_accounts = array();
     }
-
 
     /**
      * Returns a list overview of all checks from all accounts
@@ -81,5 +79,10 @@ class Client
         }
 
         return $checks;
+    }
+
+    private function _generateAccountKey(\CarlosIO\Pingdom\Account $account)
+    {
+        return md5(serialize($account));
     }
 }

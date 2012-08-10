@@ -1,0 +1,29 @@
+{
+    "actions": {
+        "alerts": [
+            {
+                "contactname" : "John Doe",
+                "contactid" : 111250,
+                "checkid" : 241688,
+                "time" : 1292248276,
+                "via" : "sms",
+                "status" : "delivered",
+                "messageshort" : "up",
+                "messagefull" : "PingdomAlert UP: MyCheck (example.com) is UP again at 2010-12-13 14:50:54. Downtime: 12m.",
+                "sentto" : "46-555555",
+                "charged" : true
+            }, {
+                "contactname" : "John Doe",
+                "contactid" : 111250,
+                "checkid" : 241688,
+                "time" : 1292248254,
+                "via" : "email",
+                "status" : "sent",
+                "messageshort" : "up",
+                "messagefull" : "FROM:alert@pingdom.com\r\nTO:john@example.com\r\nSubject:UP alert: MyCheck (example.com) is UP\r\n\r\nPingdomAlert UP:\r\nMyCheck (example.com) is UP again at 2010-12-13 14:50:54, after 12m of downtime.",
+                "sentto" : "john@example.com",
+                "charged" : false
+            }
+        ]
+    }
+}
