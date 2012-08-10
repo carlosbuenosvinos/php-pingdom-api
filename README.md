@@ -17,6 +17,8 @@ Here are the services you can use using this API:
   * /api/{version}/checks
 * Actions
   * /api/{version}/actions
+* Contacts
+  * /api/{version}/contacts
 
 Requiring in another project
 ============================
