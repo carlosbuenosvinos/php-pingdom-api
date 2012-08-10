@@ -14,7 +14,7 @@ All the Pingdom services are available at http://www.pingdom.com/services/api-do
 
 Here are the services you can use using this API:
 * Check
-** /api/{version}/checks
+  * /api/{version}/checks
 
 Requiring in another project
 ============================
