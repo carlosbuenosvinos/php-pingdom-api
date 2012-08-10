@@ -41,5 +41,8 @@ Usage is fairly straightforward. Here is an example:
     $client->addAccount(new Account('<user>', '<password>', '<token>'));
     $checks = $client->getChecks();
 
-    print_r($checks);
+    // As an example...
+    foreach ($checks as /** @var \CarlosIO\Pingdom\Check $check */ $check) {
+        echo $check->getName(), ' (', $check->getHostname(), ')', PHP_EOL, $check->getStatus(), ' ', $check->getLastResponseTime(), PHP_EOL;
+    }
 ```
