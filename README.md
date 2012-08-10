@@ -44,16 +44,6 @@ php composer.phar install
 
 Use the generated `vendor/autoload.php` file to autoload the library classes.
 
-Requiring in another project
-============================
-Using composer:
-
-```
-    "require": {
-        "carlosio/pingdom": "1.*"
-    }
-```
-
 Usage
 =====
 Usage is fairly straightforward. Here is an example:
