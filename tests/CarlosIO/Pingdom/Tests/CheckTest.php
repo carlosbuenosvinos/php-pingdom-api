@@ -22,5 +22,6 @@ class CheckTest extends \PHPUnit_Framework_TestCase
         $this->assertSame(1, $item->getResolution());
         $this->assertSame('up', $item->getStatus());
         $this->assertSame('http', $item->getType());
+        $this->assertSame(null, $item->getCreated());
     }
 }

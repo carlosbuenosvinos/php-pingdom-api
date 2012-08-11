@@ -21,5 +21,10 @@ class ContactTest extends \PHPUnit_Framework_TestCase
         $this->assertSame('clickatell', $item->getDefaultSmsProvider());
         $this->assertSame(false, $item->getDirectTwitter());
         $this->assertSame(false, $item->getPaused());
+
+        // Not existing properties
+        $this->assertSame(null, $item->getAndroidTokens());
+        $this->assertSame(null, $item->getIphoneTokens());
+        $this->assertSame(null, $item->getTwitterUser());
     }
 }
