@@ -1,0 +1,34 @@
+{
+    "probes":[
+        {
+            "id":1,
+            "country":"United Kingdom",
+            "city":"Manchester",
+            "name":"Manchester, UK",
+            "active":true,
+            "hostname":"s424.pingdom.com",
+            "ip":"212.84.74.156",
+            "countryiso":"GB"
+        },
+        {
+            "id":2,
+            "country":"United States",
+            "city":"New York",
+            "name":"New York, NY",
+            "active":true,
+            "hostname":"s413.pingdom.com",
+            "ip":"70.32.40.2",
+            "countryiso":"US"
+        },
+        {
+            "id":3,
+            "country":"Denmark",
+            "city":"Copenhagen",
+            "name":"Copenhagen, Denmark",
+            "active":true,
+            "hostname":"s416.pingdom.com",
+            "ip":"82.103.128.63",
+            "countryiso":"DK"
+        }
+    ]
+}

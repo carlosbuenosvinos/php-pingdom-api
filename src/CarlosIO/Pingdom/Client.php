@@ -129,6 +129,38 @@ class Client
         return $items;
     }
 
+    /**
+     * Returns the current time of the API server for all accounts
+     *
+     * @throws \Exception
+     * @return array<\CarlosIO\Pingdom\ServerTime> All server times
+     */
+    public function getServerTime()
+    {
+        $items = array();
+        foreach ($this->_accounts as /** @var \CarlosIO\Pingdom\Account $account */ $account) {
+            $items = array_merge($items, $account->getServerTime());
+        }
+
+        return $items;
+    }
+
+    /**
+     * Returns a list of all Pingdom probe servers for all the accounts
+     *
+     * @throws \Exception
+     * @return array<\CarlosIO\Pingdom\Probe> All probes
+     */
+    public function getProbes()
+    {
+        $items = array();
+        foreach ($this->_accounts as /** @var \CarlosIO\Pingdom\Account $account */ $account) {
+            $items = array_merge($items, $account->getProbes());
+        }
+
+        return $items;
+    }
+
     private function _generateAccountKey(\CarlosIO\Pingdom\Account $account)
     {
         return md5(serialize($account));

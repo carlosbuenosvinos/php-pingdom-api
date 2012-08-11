@@ -13,14 +13,12 @@ Features
 All the Pingdom services are available at http://www.pingdom.com/services/api-documentation-rest
 
 Here are the services you can use using this API:
-* Check
-  * /api/{version}/checks
-* Actions
-  * /api/{version}/actions
-* Contacts
-  * /api/{version}/contacts
-* Credits
-  * /api/{version}/credits
+* [Check](http://www.pingdom.com/services/api-documentation-rest/#MethodGet+Check+List)
+* [Actions](http://www.pingdom.com/services/api-documentation-rest/#MethodGet+Actions+%28Alerts%29+List)
+* [Contacts](http://www.pingdom.com/services/api-documentation-rest/#MethodGet+Contacts+List)
+* [Credits](http://www.pingdom.com/services/api-documentation-rest/#MethodGet+Credits+List)
+* [Probes](http://www.pingdom.com/services/api-documentation-rest/#MethodGet+Probe+Server+List)
+* [ServerTime](http://www.pingdom.com/services/api-documentation-rest/#MethodGet+Current+Server+Time)
 
 Installation
 ============
@@ -78,5 +76,15 @@ Usage is fairly straightforward. Here is an example:
     $credits = $client->getCredits();
     foreach ($credits as /** @var \CarlosIO\Pingdom\Credit $credit */ $credit) {
         echo $credit->getAvailableChecks(), PHP_EOL;
+    }
+
+    $probes = $client->getProbes();
+    foreach ($probes as /** @var \CarlosIO\Pingdom\Probe $probe */ $probe) {
+        echo $probe->getCountry(), ' ', $probe->getIp(), PHP_EOL;
+    }
+
+    $serverTimes = $client->getServerTime();
+    foreach ($serverTimes as /** @var \CarlosIO\Pingdom\ServerTime $serverTime */ $serverTime) {
+        echo $serverTime->getServerTime(), PHP_EOL;
     }
 ```

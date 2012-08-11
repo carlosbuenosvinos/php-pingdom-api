@@ -188,6 +188,48 @@ class Account
         return $result;
     }
 
+    /**
+     * Returns a list of all probes from current account
+     *
+     * @throws \Exception
+     * @return array<\CarlosIO\Pingdom\Probe> All credits
+     */
+    public function getProbes($options = array())
+    {
+        $response = $this->_callMethod('probes', $options);
+        $itemList = $response['probes'];
+
+        $result = array();
+        foreach ($itemList as $item) {
+            $newItem = \CarlosIO\Pingdom\Probe::createFromArray($item);
+            $newItem->setAccount($this);
+            $result[] = $newItem;
+        }
+
+        return $result;
+    }
+
+    /**
+     * Returns a list of all server times for current account
+     *
+     * @throws \Exception
+     * @return array<\CarlosIO\Pingdom\ServerTime>
+     */
+    public function getServerTime($options = array())
+    {
+        $response = $this->_callMethod('servertime', $options);
+        $itemList = array($response);
+
+        $result = array();
+        foreach ($itemList as $item) {
+            $newItem = \CarlosIO\Pingdom\ServerTime::createFromArray($item);
+            $newItem->setAccount($this);
+            $result[] = $newItem;
+        }
+
+        return $result;
+    }
+
     protected function _callMethod($command, $options)
     {
         $client = $this->_client;
