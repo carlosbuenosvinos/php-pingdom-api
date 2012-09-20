@@ -59,7 +59,7 @@ Usage is fairly straightforward. Here is an example:
     // As an example...
     $checks = $client->getChecks();
     foreach ($checks as /** @var \CarlosIO\Pingdom\Check $check */ $check) {
-        echo $check->getName(), ' (', $check->getHostname(), ')', PHP_EOL
+        echo $check->getName(), ' (', $check->getHostname(), ')', PHP_EOL;
         echo $check->getStatus(), ' ', $check->getLastResponseTime(), PHP_EOL;
     }
 
